@@ -1,0 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #1b1b1b;
+}
+/* ============================================
+   Retro LED Calculator
+   Ivory plastic body / amber LED readout
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #14231c;
+  font-family: "Verdana", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- Body / shell ---------- */
+
+.calculator {
+  position: relative;
+  width: 320px;
+  padding: 22px 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
+  background: linear-gradient(180deg, #efe9d8 0%, #ddd5bd 100%);
+  border-radius: 18px 18px 26px 26px;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* decorative "screws" — signature detail referencing a real device casing */
+.calculator::before,
+.calculator::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a89f88;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.calculator::before { left: 12px; }
+.calculator::after   { right: 12px; }
+
+/* ---------- Display ---------- */
+
+.value {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 76px;
+  margin-bottom: 4px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 10px;
+  background: #0e1a14;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.6);
+
+  color: #ffb000;
+  text-shadow: 0 0 8px rgba(255, 176, 0, 0.65);
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 2px;
+  text-align: right;
+
+  outline: none;
+}
+
+/* ---------- Buttons (default: digits) ---------- */
+
+.calculator > span {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  background: #faf7ee;
+  color: #33302a;
+
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+    0 3px 0 #c9c0a8,
+    0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+}
+
+.calculator > span:hover {
+  background: #ffffff;
+}
+
+.calculator > span:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 #c9c0a8, 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Operators: /, *, -, + ----------
+   (/ and * and - have no class in the markup, so they're
+   targeted by their fixed position among the form's children) */
+
+.calculator > span:nth-child(3),  /* / */
+.calculator > span:nth-child(4),  /* * */
+.calculator > span:nth-child(8),  /* - */
+.plus {
+  background: #e8631c;
+  color: #fff5eb;
+  box-shadow:
+    0 3px 0 #b74c12,
+    0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.calculator > span:nth-child(3):hover,
+.calculator > span:nth-child(4):hover,
+.calculator > span:nth-child(8):hover,
+.plus:hover {
+  background: #f0731f;
+}
+
+.calculator > span:nth-child(3):active,
+.calculator > span:nth-child(4):active,
+.calculator > span:nth-child(8):active,
+.plus:active {
+  box-shadow: 0 0 0 #b74c12, 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Clear ---------- */
+
+.clear {
+  background: #a63a3a;
+  color: #fff2ef;
+  box-shadow:
+    0 3px 0 #7f2a2a,
+    0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.clear:hover {
+  background: #b64444;
+}
+
+.clear:active {
+  box-shadow: 0 0 0 #7f2a2a, 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Equal ---------- */
+
+.equal {
+  grid-column: span 2;
+  background: #1b998b;
+  color: #eafff9;
+  box-shadow:
+    0 3px 0 #12766b,
+    0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.equal:hover {
+  background: #21ad9d;
+}
+
+.equal:active {
+  box-shadow: 0 0 0 #12766b, 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 380px) {
+  .calculator {
+    width: 92%;
+    padding: 18px 14px 16px;
+    gap: 8px;
+  }
+
+  .value {
+    height: 68px;
+    font-size: 26px;
+  }
+
+  .calculator > span {
+    height: 50px;
+    font-size: 17px;
+  }
+}
+
+.calculator {
+  position: relative;
+  display: grid;
+}
+
+.calculator .value {
+  grid-column: span 4;
+  height: 100px;
+  text-align: right;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.calculator span {
+  display: grid;
+  width: 60px;
+  height: 60px;
+  background: #292929;
+  place-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.calculator span:active {
+  background: rgb(255, 163, 26);
+  color: #fff;
+}
+
+.calculator span.clear {
+  grid-column: span 2;
+  width: 120px;
+  background: rgb(255, 163, 26);
+  /* color: #fff; */
+}
+
+.calculator span.plus {
+  grid-row: span 2;
+  height: 120px;
+}
+
+.calculator span.equal {
+  background: rgb(255, 163, 26);
+  /* background: #03b1ff; */
+}
